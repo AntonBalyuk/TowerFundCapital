@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower Fund Capital</title>
+    <style>
+        @font-face {
+            font-family: 'Catamaran';
+            src: url('fonts/catmaraan/Catamaran-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Catamaran';
+            src: url('fonts/catmaraan/Catamaran-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Catamaran';
+            src: url('fonts/catmaraan/Catamaran-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Catamaran';
+            src: url('fonts/catmaraan/Catamaran-Black.ttf') format('truetype');
+            font-weight: 900;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Gilroy';
+            src: url('fonts/gilroy/Gilroy-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Gilroy';
+            src: url('fonts/gilroy/Gilroy-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        :root {
+            --primary-dark: #0F0C59;
+            --primary-light: #01ABFF;
+            --accent: #01D694;
+            --accent-dark: #00a374;
+            --white: #fff;
+            --text-dark: #333;
+            --text-light: #fff;
+            --separator-color: #fff;
+            --base-font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Catamaran', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: var(--white);
+            font-size: var(--base-font-size);
+            line-height: 1.5;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Gilroy', sans-serif;
+            font-weight: 600;
+        }
+
+        button {
+            font-family: 'Catamaran', sans-serif;
+            font-size: var(--base-font-size);
+        }
+
+        section:not(:last-child) {
+            border-bottom: 1px solid var(--separator-color);
+        }
+
+        .keep-section {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: clamp(0.8rem, 1.5vw, 1.5rem);
+        }
+
+        .keep-section h1 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .combined-white-section {
+            background-color: var(--white);
+            padding: clamp(0.8rem, 1.5vw, 1.5rem);
+            text-align: center;
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(1rem, 2vw, 2rem);
+        }
+
+        .tagline {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(0.3rem, 0.8vw, 0.8rem);
+        }
+
+        .tagline span {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .pipe {
+            color: var(--primary-dark);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        .custom-separator {
+            width: 50%;
+            height: clamp(1px, 0.2vw, 2px);
+            background-color: var(--accent);
+            margin: clamp(0.5rem, 1vw, 1rem) auto;
+        }
+
+        .guarantee-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .guarantee-section h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            color: var(--primary-dark);
+            margin: 0 0 clamp(0.3rem, 0.8vw, 0.8rem) 0;
+        }
+
+        .guarantees {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: clamp(1rem, 5vw, 8rem);
+            width: 100%;
+            max-width: clamp(700px, 75vw, 900px);
+        }
+
+        .guarantee-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: clamp(120px, 12vw, 160px);
+        }
+
+        .guarantee-item img {
+            width: clamp(50px, 5vw, 80px);
+            height: clamp(50px, 5vw, 80px);
+            margin-bottom: clamp(0.3rem, 0.8vw, 0.8rem);
+        }
+
+        .guarantee-item div {
+            height: clamp(30px, 3vw, 40px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(0.8rem, 1.5vw, 1.5rem);
+            padding: clamp(0.8rem, 1.5vw, 1.5rem);
+            text-align: center;
+            background-color: var(--white);
+        }
+
+        .stats-section .stat h3 {
+            font-size: var(--base-font-size);
+            color: var(--primary-dark);
+            margin-bottom: clamp(0.3rem, 0.8vw, 0.8rem);
+        }
+
+        .stats-section .stat .stat-value {
+            font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+            font-weight: 700;
+            color: var(--primary-dark);
+            position: relative;
+            height: 2em;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .stats-section .slot-digit {
+            display: inline-block;
+            position: relative;
+            width: 1ch;
+            text-align: center;
+        }
+
+        .reviews-section {
+            background-color: var(--primary-dark);
+            position: relative;
+            padding: clamp(1.5rem, 2.5vw, 2.5rem);
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reviews-section h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: clamp(0.8rem, 1.5vw, 1.2rem);
+        }
+
+        .reviews-section .review-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .reviews-section .reviews-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .reviews-section .review {
+            min-width: 100%;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            flex-grow: 0;
+            padding: 0 10px;
+        }
+
+        .reviews-section .review-inner {
+            width: 90%;
+            max-width: 800px;
+            padding: clamp(1rem, 1.5vw, 1.5rem);
+            background-color: var(--white);
+            border-radius: clamp(8px, 1vw, 12px);
+            box-shadow: 0 clamp(1px, 0.3vw, 2px) clamp(2px, 0.5vw, 4px) rgba(0,0,0,0.1);
+            text-align: center;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            min-height: 120px;
+        }
+
+        .reviews-section .review p {
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            margin: 0;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+            white-space: normal;
+            flex: 2;
+            max-width: 65%;
+        }
+
+        .reviews-section .reviewer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            margin: 0;
+        }
+
+        .reviews-section .reviewer img {
+            width: clamp(50px, 5vw, 60px);
+            height: clamp(50px, 5vw, 60px);
+            border-radius: 50%;
+            margin-right: clamp(0.3rem, 0.8vw, 0.8rem);
+        }
+
+        .reviews-section .reviewer span {
+            font-size: clamp(0.8rem, 1vw, 1rem);
+            color: var(--primary-dark);
+        }
+
+        .reviews-section .arrows {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 clamp(1.5rem, 2.5vw, 2.5rem);
+            z-index: 10;
+        }
+
+        .reviews-section .arrows button {
+            background: none;
+            border: none;
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: var(--primary-light);
+            cursor: pointer;
+            z-index: 10;
+            margin: 0 10px;
+        }
+
+        .reviews-section .dots {
+            display: flex;
+            justify-content: center;
+            gap: clamp(0.3rem, 0.8vw, 0.8rem);
+            margin-top: clamp(0.8rem, 1.5vw, 1.2rem);
+            z-index: 10;
+        }
+
+        .reviews-section .dot {
+            width: clamp(0.4rem, 0.8vw, 0.8rem);
+            height: clamp(0.4rem, 0.8vw, 0.8rem);
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .reviews-section .dot.active {
+            background-color: var(--accent);
+        }
+
+        .stats-section .stat .stat-value {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .stats-section .reel {
+            height: 2em;
+            overflow: hidden;
+            display: inline-flex;
+            flex-direction: column;
+            transition: filter 0.1s;
+        }
+
+        .stats-section .digit {
+            font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+            font-weight: 700;
+            height: 2em;
+            line-height: 2em;
+            text-align: center;
+        }
+
+        .funded-properties-section {
+            padding: clamp(1rem, 1.5vw, 1.5rem);
+            background-color: var(--white);
+        }
+
+        .funded-properties-section h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: clamp(0.8rem, 1.5vw, 1.2rem);
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: clamp(0.3rem, 0.8vw, 0.8rem);
+        }
+
+        .property-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 0.5s ease-in forwards;
+            min-height: 200px;
+        }
+
+        .property-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .property-info {
+            padding: clamp(0.3rem, 0.8vw, 0.6rem);
+        }
+
+        .property-info p {
+            margin: 0.2rem 0;
+            font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+        }
+
+        .learn-more {
+            background-color: var(--accent);
+            color: var(--text-light);
+            border: none;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+            margin-top: 0.3rem;
+        }
+
+        .learn-more:hover {
+            background-color: var(--accent-dark);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1200px) {
+            .properties-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .properties-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+
+            .combined-white-section {
+                min-height: 60vh;
+            }
+
+            .guarantees, .values {
+                flex-direction: column;
+                gap: clamp(0.8rem, 1.5vw, 1.2rem);
+            }
+
+            .guarantee-item, .values span {
+                width: auto;
+                min-width: auto;
+            }
+
+            .tagline {
+                flex-wrap: wrap;
+                gap: clamp(0.3rem, 0.8vw, 0.8rem);
+            }
+
+            .tagline span {
+                font-size: clamp(1rem, 1.5vw, 1.2rem);
+            }
+
+            .values .pipe {
+                display: none;
+            }
+
+            .keep-section h1 {
+                font-size: clamp(1.2rem, 2vw, 1.5rem);
+            }
+
+            .combined-white-section h2 {
+                font-size: clamp(1rem, 1.5vw, 1.2rem);
+            }
+
+            .solution-section h2 {
+                font-size: clamp(1rem, 1.5vw, 1.2rem);
+                flex-direction: column;
+                gap: clamp(0.2rem, 0.8vw, 0.3rem);
+            }
+
+            .solution-section .larger-text {
+                font-size: clamp(1.2rem, 2vw, 1.5rem);
+            }
+
+            .solution-section .join-section p {
+                font-size: clamp(0.8rem, 1vw, 1rem);
+            }
+
+            .solution-section .application-button {
+                min-width: clamp(100px, 10vw, 120px);
+                padding: clamp(0.3rem, 0.8vw, 0.5rem) clamp(0.8rem, 1.2vw, 1.2rem);
+            }
+        }
+
+        .solution-section {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: clamp(0.8rem, 1.5vw, 1.5rem);
+        }
+
+        .solution-section h2 {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            margin-bottom: clamp(0.8rem, 1.5vw, 1.2rem);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(0.5rem, 1vw, 0.8rem);
+        }
+
+        .solution-section .larger-text {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .solution-section .join-section p {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: var(--text-light);
+            margin-bottom: clamp(0.3rem, 0.8vw, 0.8rem);
+        }
+
+        .solution-section .application-button {
+            background-color: var(--white);
+            color: var(--primary-dark);
+            padding: clamp(0.5rem, 0.8vw, 0.6rem) clamp(1rem, 1.5vw, 1.5rem);
+            min-width: clamp(120px, 12vw, 150px);
+            border: none;
+            font-size: var(--base-font-size);
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: clamp(4px, 0.8vw, 4px);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .solution-section .application-button:hover {
+            background-color: var(--primary-light);
+            color: var(--text-light);
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const statsData = [
+                { digits: [1, 0], suffix: 'M' },
+                { digits: [5], suffix: 'K' },
+                { digits: [2, 0, 0, 0], suffix: '' }
+            ];
+
+            const statsSection = document.querySelector('.stats-section');
+            const stats = document.querySelectorAll('.stats-section .stat .stat-value');
+
+            stats.forEach((stat, statIndex) => {
+                statsData[statIndex].digits.forEach(digit => {
+                    const digitSpan = document.createElement('span');
+                    digitSpan.className = 'slot-digit';
+                    digitSpan.textContent = '0';
+                    stat.appendChild(digitSpan);
+                });
+                if (statsData[statIndex].suffix) {
+                    const suffixSpan = document.createElement('span');
+                    suffixSpan.textContent = statsData[statIndex].suffix;
+                    stat.appendChild(suffixSpan);
+                }
+            });
+
+            const observerStats = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        stats.forEach((stat, statIndex) => {
+                            const digits = stat.querySelectorAll('.slot-digit');
+                            digits.forEach((digit, digitIndex) => {
+                                let spinCount = 0;
+                                const maxSpins = 20 + Math.random() * 10;
+                                const interval = setInterval(() => {
+                                    digit.textContent = Math.floor(Math.random() * 10);
+                                    spinCount++;
+                                    if (spinCount >= maxSpins) {
+                                        clearInterval(interval);
+                                        digit.textContent = statsData[statIndex].digits[digitIndex];
+                                    }
+                                }, 50 + Math.random() * 20);
+                            });
+                        });
+                        observerStats.unobserve(statsSection);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observerStats.observe(statsSection);
+
+            const reviewsWrapper = document.querySelector('.reviews-wrapper');
+            const reviews = document.querySelectorAll('.review');
+            const totalReviews = reviews.length;
+            const leftArrow = document.querySelector('.left-arrow');
+            const rightArrow = document.querySelector('.right-arrow');
+            const dotsContainer = document.querySelector('.dots');
+            let currentIndex = 0;
+
+            reviews.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateReviews();
+                });
+                dotsContainer.appendChild(dot);
+            });
+
+            function updateReviews() {
+                reviewsWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            leftArrow.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalReviews) % totalReviews;
+                updateReviews();
+            });
+
+            rightArrow.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalReviews;
+                updateReviews();
+            });
+
+            updateReviews();
+        });
+    </script>
+</head>
+<body>
+    <header class="keep-section">
+        <h1>Original site top</h1>
+    </header>
+
+    <section class="combined-white-section">
+        <div class="tagline">
+            <span>Reliable</span>
+            <span class="pipe">|</span>
+            <span class="phrase">Fair Pricing</span>
+            <span class="pipe">|</span>
+            <span class="phrase">Seamless</span>
+        </div>
+        <div class="custom-separator"></div>
+        <div class="guarantee-section">
+            <h2>WE GUARANTEE</h2>
+            <div class="guarantees">
+                <div class="guarantee-item">
+                    <img src="images/clockcopy.png" alt="Guarantee Image 1">
+                    <div>24 Hour Approval</div>
+                </div>
+                <div class="guarantee-item">
+                    <img src="images/contractcopy.png" alt="Guarantee Image 2">
+                    <div>10 Day Closing</div>
+                </div>
+                <div class="guarantee-item">
+                    <img src="images/check.png" alt="Guarantee Image 3">
+                    <div>100% Success</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stat">
+            <h3>Total Amount Funded</h3>
+            <p class="stat-value"></p>
+        </div>
+        <div class="stat">
+            <h3>Average Loan Amount</h3>
+            <p class="stat-value"></p>
+        </div>
+        <div class="stat">
+            <h3>Loans Funded</h3>
+            <p class="stat-value"></p>
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <h2>WHAT OUR CLIENTS SAY</h2>
+        <div class="review-container">
+            <div class="reviews-wrapper">
+                <div class="review">
+                    <div class="review-inner">
+                        <p>"Ed took a call from me today, and provided invaluable counsel with no expectation that he would be able to finance our deal! Thank you Ed."</p>
+                        <div class="reviewer">
+                            <img src="Reviewer/reviewer1.webp" alt="Reviewer Photo">
+                            <span>Brendaen Makechnie, Principle</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="review">
+                    <div class="review-inner">
+                        <p>"Choosing a hard money lender is not easy and what's best for you may be different than what's best for someone else. Tower Fund Capital is fast reliable and has an easy closing system. They closed my refinance in 4 days . . Do your due diligence when finding a hard money lender and you will find out that Tower Fund Capital pricing and speed is one of the best !!!! Timing in this Great Realestate business is everything . After getting jerked around by a few banks for over five months I took my prepared package to Tower fund Capital . They did not just meet my expectations they over Exceeded my Expectations with a fast stress free 4DAY REFI closing !! Results Results Results !!!!"</p>
+                        <div class="reviewer">
+                            <img src="Reviewer/reviewer2.webp" alt="Reviewer Photo 2">
+                            <span>Jade Mcqueen, Investor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="review">
+                    <div class="review-inner">
+                        <p>"Very reliable!"</p>
+                        <div class="reviewer">
+                            <img src="images/reviewer3.png" alt="Reviewer Photo 3">
+                            <span>Sarah</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="arrows">
+            <button class="left-arrow"><</button>
+            <button class="right-arrow">></button>
+        </div>
+        <div class="dots"></div>
+    </section>
+
+    <section class="funded-properties-section">
+        <h2>RECENTLY FUNDED LOANS</h2>
+        <div class="properties-grid">
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="imagesproperty/property1.png" alt="Commercial Property in Pennsylvania">
+                </div>
+                <div class="property-info">
+                    <p>Commercial Property</p>
+                    <p>Pennsylvania</p>
+                    <p>Purchase</p>
+                    <p>Loan Amount: $17,000,000.00</p>
+                </div>
+            </div>
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="imagesproperty/property2.png" alt="1 Family Property in Westhampton Beach">
+                </div>
+                <div class="property-info">
+                    <p>1 Family Property</p>
+                    <p>Westhampton Beach</p>
+                    <p>Acquisition</p>
+                    <p>Loan Amount: $4,030,000.00</p>
+                </div>
+            </div>
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="imagesproperty/property3.webp" alt="6 Family Property in New York">
+                </div>
+                <div class="property-info">
+                    <p>6 Family</p>
+                    <p>New York</p>
+                    <p>Purchase</p>
+                    <p>Loan Amount: $5,500,000.00</p>
+                </div>
+            </div>
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="imagesproperty/property4.webp" alt="Mixed-Use Property in Brooklyn">
+                </div>
+                <div class="property-info">
+                    <p>Mixed-Use Property</p>
+                    <p>Brooklyn</p>
+                    <p>Refinance</p>
+                    <p>Loan Amount: $5,500,000.00</p>
+                </div>
+            </div>
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="imagesproperty/property5.png" alt="1 Family Property in Palm Beach">
+                </div>
+                <div class="property-info">
+                    <p>1 Family Property</p>
+                    <p>Palm Beach</p>
+                    <p>Cash-out Refinance</p>
+                    <p>Loan Amount: $6,250,000.00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution-section">
+        <h2>
+            <span class="larger-text">We</span> can find a solution for <span class="larger-text">You</span>
+        </h2>
+        <div class="join-section">
+            <p>Join The Tower Family</p>
+            <button class="application-button">Join</button>
+        </div>
+    </section>
+</body>
+</html>
